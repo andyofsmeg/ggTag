@@ -38,9 +38,9 @@ grid.layout(nrow = 3, ncol = 3,
 
 # Create ggplot2 graphic
 myPlot <- qplot(Weight, Height, data = demoData, facets = Sex ~ Smokes,
-main = "Scatter Plot of Height against Weight\\nby Sex and Smoking Status\\n",
-xlab = "\\nWeight",
-ylab = "Height\\n"
+  main = "Scatter Plot of Height against Weight\\nby Sex and Smoking Status\\n",
+  xlab = "\\nWeight",
+  ylab = "Height\\n"
 )
 myPlot <- myPlot + theme_bw() 
 myPlot <- myPlot + 
