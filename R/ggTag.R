@@ -1,7 +1,8 @@
 #' Tag a ggplot2 graphic with meta information
 #' 
 #' Tag a ggplot2 or lattice (or any grid) object with meta information by nesting it within a grid framework
-#' @param object A ggplot or lattice object 
+#' @param object A ggplot or lattice object
+#' @param extractTitle Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.
 #' @param meta1 A line of meta information
 #' @param meta2 A second line of meta information to appear below the first
 #' @param date Logical. Defaults to TRUE. 
@@ -40,10 +41,15 @@
 #' ggTag(myPlot, meta1 = "Protocol: 123456", meta2 = "Study: 123456", 
 #'       date = TRUE, username = TRUE, path = FALSE)
 #' }
-ggTag <- function(object, meta1="", meta2="", 
+ggTag <- function(object, extractTitle = TRUE, title, meta1="", meta2="", 
                   date = TRUE, username = TRUE, path = TRUE){
-
+  
 	# Redefine text to print to plot
+  if(extractTitle) {
+    theTitle <- extractGGTitle(object)
+    object <- deleteGGTitle(object)
+  }
+  else theTitle <- title
 	userID <- ifelse(username, Sys.getenv("USERNAME"), "")
 	projectPath <- ifelse(path, getwd(), "")
 	idAndProjectPath <- paste(userID, projectPath, sep = ": ")
@@ -61,6 +67,8 @@ ggTag <- function(object, meta1="", meta2="",
 	pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 2))
 	  grid.text(meta1, x = unit(0, "npc"), y = unit(3, "lines"), just = c(0, 1))
 	  grid.text(meta2, x = unit(0, "npc"), y = unit(2, "lines"), just = c(0, 1))
+	  if(!is.null(theTitle))
+	  grid.text(theTitle, x = unit(0.5, "npc"), y = unit(1, "lines"), just = c(0.5, 1))
 	popViewport()
 	
 	# Bottom

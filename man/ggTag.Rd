@@ -4,11 +4,13 @@
 \alias{ggTag}
 \title{Tag a ggplot2 graphic with meta information}
 \usage{
-ggTag(object, meta1 = "", meta2 = "", date = TRUE, username = TRUE,
-  path = TRUE)
+ggTag(object, extractTitle = TRUE, title, meta1 = "", meta2 = "",
+  date = TRUE, username = TRUE, path = TRUE)
 }
 \arguments{
 \item{object}{A ggplot or lattice object}
+
+\item{extractTitle}{Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.}
 
 \item{meta1}{A line of meta information}
 
