@@ -1,5 +1,5 @@
 Package: ggTag2
-Title: A package to allow ggplot2 or lattice graphics to be "tagged" with meta information.
+Title: A package to allow ggplot2 or lattice graphics to be "tagged" with meta information
 Version: 0.1
 Author: Andy Nicholls <anicholls@mango-solutions.com>
 Maintainer: Andy Nicholls <anicholls@mango-solutions.com>

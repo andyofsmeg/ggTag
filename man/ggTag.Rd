@@ -8,17 +8,17 @@ ggTag(object, meta1 = "", meta2 = "", date = TRUE, username = TRUE,
   path = TRUE)
 }
 \arguments{
-\item{object.}{A ggplot or lattice object}
+\item{object}{A ggplot or lattice object}
 
-\item{meta1.}{A line of meta information}
+\item{meta1}{A line of meta information}
 
-\item{meta2.}{A second line of meta information to appear below the first}
+\item{meta2}{A second line of meta information to appear below the first}
 
-\item{date.}{Defaults to TRUE.}
+\item{date}{Logical. Defaults to TRUE.}
 
-\item{username.}{Defaults to TRUE.}
+\item{username}{Logical. Defaults to TRUE.}
 
-\item{path.}{Defaults to TRUE.}
+\item{path}{Logical. Defaults to TRUE.}
 }
 \description{
 Tag a ggplot2 or lattice (or any grid) object with meta information by nesting it within a grid framework

@@ -1,12 +1,12 @@
 #' Tag a ggplot2 graphic with meta information
 #' 
 #' Tag a ggplot2 or lattice (or any grid) object with meta information by nesting it within a grid framework
-#' @param object. A ggplot or lattice object 
-#' @param meta1. A line of meta information
-#' @param meta2. A second line of meta information to appear below the first
-#' @param date. Defaults to TRUE. 
-#' @param username. Defaults to TRUE.
-#' @param path. Defaults to TRUE.
+#' @param object A ggplot or lattice object 
+#' @param meta1 A line of meta information
+#' @param meta2 A second line of meta information to appear below the first
+#' @param date Logical. Defaults to TRUE. 
+#' @param username Logical. Defaults to TRUE.
+#' @param path Logical. Defaults to TRUE.
 #' @import grid
 #' @export
 #' @examples{
