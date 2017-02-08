@@ -15,4 +15,3 @@ Character tile or NULL if it doesn't exist
 \description{
 Extract the title from a ggplot object
 }
-

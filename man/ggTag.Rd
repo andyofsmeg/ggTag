@@ -12,6 +12,8 @@ ggTag(object, extractTitle = TRUE, title, meta1 = "", meta2 = "",
 
 \item{extractTitle}{Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.}
 
+\item{title}{Character.You own title.  Overridden if extractTitle is TRUE.}
+
 \item{meta1}{A line of meta information}
 
 \item{meta2}{A second line of meta information to appear below the first}
@@ -58,4 +60,3 @@ ggTag(myPlot, meta1 = "Protocol: 123456", meta2 = "Study: 123456",
       date = TRUE, username = TRUE, path = FALSE)
 }
 }
-

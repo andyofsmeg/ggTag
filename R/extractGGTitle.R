@@ -19,5 +19,6 @@ extractGGTitle <- function(object){
 #' @export
 deleteGGTitle <- function(object){
   object$labels$title <- NULL
+  object$labels$subtitle <- NULL
   object
 }

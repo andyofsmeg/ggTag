@@ -15,4 +15,3 @@ The original object, minus the title
 \description{
 Remove the title from a ggplot object
 }
-

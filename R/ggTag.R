@@ -3,6 +3,7 @@
 #' Tag a ggplot2 or lattice (or any grid) object with meta information by nesting it within a grid framework
 #' @param object A ggplot or lattice object
 #' @param extractTitle Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.
+#' @param title Character.You own title.  Overridden if extractTitle is TRUE.
 #' @param meta1 A line of meta information
 #' @param meta2 A second line of meta information to appear below the first
 #' @param date Logical. Defaults to TRUE. 

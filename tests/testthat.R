@@ -1,4 +1,4 @@
 library(testthat)
-library(ggTag2)
+library(ggTag)
 
-test_check("ggTag2")
+test_check("ggTag")
