@@ -4,11 +4,11 @@
 #' @param object A ggplot or lattice object
 #' @param extractTitle Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.
 #' @param title Character.You own title.  Overridden if extractTitle is TRUE.
-#' @param meta1 A line of meta information
-#' @param meta2 A second line of meta information to appear below the first
+#' @param meta Lines of meta information
 #' @param date Logical. Defaults to TRUE. 
 #' @param username Logical. Defaults to TRUE.
 #' @param path Logical. Defaults to TRUE.
+#' @param dateFormat Character.  R date format to use for the date.
 #' @import grid
 #' @export
 #' @examples{
@@ -39,37 +39,47 @@
 #' myPlot
 #' 
 #' 
-#' ggTag(myPlot, meta1 = "Protocol: 123456", meta2 = "Study: 123456", 
+#' ggTag(myPlot, meta = "Protocol: 123456\nStudy: 123456", 
 #'       date = TRUE, username = TRUE, path = FALSE)
 #' }
-ggTag <- function(object, extractTitle = TRUE, title, meta1="", meta2="", 
-                  date = TRUE, username = TRUE, path = TRUE){
+ggTag <- function(object, extractTitle = TRUE, title, meta = "", 
+                  date = TRUE, username = TRUE, path = TRUE,
+                  dateFormat = "%d%b%Y %H%M"){
   
-	# Redefine text to print to plot
+  # Redefine text to print to plot
+  # Ensure appropriate title then count title lines
   if(extractTitle) {
     theTitle <- extractGGTitle(object)
     object <- deleteGGTitle(object)
   }
   else theTitle <- title
+  # Count title lines
+  titleLines <- length(unlist(str_split(theTitle, "\\n")))
+  metaLines <- length(unlist(str_split(meta, "\\n")))
+
+  # Title and meta lines
+  # TODO: break into separate script and write tests
+  totalLinesTop <- titleLines + metaLines
+
 	userID <- ifelse(username, Sys.getenv("USERNAME"), "")
 	projectPath <- ifelse(path, getwd(), "")
 	idAndProjectPath <- paste(userID, projectPath, sep = ": ")
 	theTime <- Sys.time()
+	theTime <- toupper(format(theTime, dateFormat))
 
 	# Plot
 	grid.newpage()
 	pushViewport(viewport(
 		layout = grid.layout(nrow = 3, ncol = 3,
-			heights = unit(c(4, 1, 3), c("lines", "null", "lines")),
+			heights = unit(c(totalLinesTop, 1, 3), c("lines", "null", "lines")),
 			widths = unit(c(.25, 1, .25), c("inches", "null", "inches"))
 		)
 	))
 	# Top
 	pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 2))
-	  grid.text(meta1, x = unit(0, "npc"), y = unit(3, "lines"), just = c(0, 1))
-	  grid.text(meta2, x = unit(0, "npc"), y = unit(2, "lines"), just = c(0, 1))
+	  grid.text(meta, x = unit(0, "npc"), y = unit(totalLinesTop, "lines"), just = c(0, 1))
 	  if(!is.null(theTitle))
-	  grid.text(theTitle, x = unit(0.5, "npc"), y = unit(1, "lines"), just = c(0.5, 1))
+	  grid.text(theTitle, x = unit(0.5, "npc"), y = unit(totalLinesTop-metaLines, "lines"), just = c(0.5, 1))
 	popViewport()
 	
 	# Bottom
