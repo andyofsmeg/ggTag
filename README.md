@@ -1,2 +1,2 @@
 # ggTag
-A package to allow ggplot2 or lattice graphics to be "tagged" with meta information
+A package to allow ggplot2 or lattice graphics to be "tagged" with meta information.  The primary ggTag function embeds a ggplot object within a grid framework.  The function allows a user to add titles and meta information to the outer border of a plot along with file path and date-time stamps (which are automatically added upon execution).  An existing ggplot title can optionally be moved from the original graphic to the outer framework.

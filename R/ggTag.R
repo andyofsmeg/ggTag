@@ -2,13 +2,14 @@
 #' 
 #' Tag a ggplot2 or lattice (or any grid) object with meta information by nesting it within a grid framework
 #' @param object A ggplot or lattice object
-#' @param extractTitle Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.
+#' @param useGGTitle Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.
 #' @param title Character.You own title.  Overridden if extractTitle is TRUE.
-#' @param meta1 A line of meta information
-#' @param meta2 A second line of meta information to appear below the first
+#' @param meta Lines of meta information to display in the top left
+#' @param metaR Lines of meta information to display in the top right
 #' @param date Logical. Defaults to TRUE. 
 #' @param username Logical. Defaults to TRUE.
-#' @param path Logical. Defaults to TRUE.
+#' @param path Logical, else a custom character file path. Defaults to TRUE.
+#' @param dateFormat Character.  R date format to use for the date.
 #' @import grid
 #' @export
 #' @examples{
@@ -39,37 +40,50 @@
 #' myPlot
 #' 
 #' 
-#' ggTag(myPlot, meta1 = "Protocol: 123456", meta2 = "Study: 123456", 
+#' ggTag(myPlot, meta = "Protocol: 123456\nStudy: 123456", 
 #'       date = TRUE, username = TRUE, path = FALSE)
 #' }
-ggTag <- function(object, extractTitle = TRUE, title, meta1="", meta2="", 
-                  date = TRUE, username = TRUE, path = TRUE){
+ggTag <- function(object, useGGTitle = TRUE, title, meta = "", metaR = "Page 1 of 1",
+                  date = TRUE, username = TRUE, path = TRUE,
+                  dateFormat = "%d%b%Y %H:%M"){
   
-	# Redefine text to print to plot
-  if(extractTitle) {
+  # Redefine text to print to plot
+  # Ensure appropriate title then count title lines
+  if(useGGTitle) {
     theTitle <- extractGGTitle(object)
     object <- deleteGGTitle(object)
   }
   else theTitle <- title
+  # Count title lines
+  titleLines <- length(unlist(str_split(theTitle, "\\n")))
+  metaLines <- length(unlist(str_split(meta, "\\n")))
+
+  # Title and meta lines
+  # TODO: break into separate script and write tests
+  totalLinesTop <- titleLines + metaLines + 1.5
+
 	userID <- ifelse(username, Sys.getenv("USERNAME"), "")
-	projectPath <- ifelse(path, getwd(), "")
+	if(class(path) == "logical") projectPath <- ifelse(path, getwd(), "")
+	else projectPath <- path
 	idAndProjectPath <- paste(userID, projectPath, sep = ": ")
 	theTime <- Sys.time()
+	theTime <- toupper(format(theTime, dateFormat))
 
 	# Plot
 	grid.newpage()
 	pushViewport(viewport(
 		layout = grid.layout(nrow = 3, ncol = 3,
-			heights = unit(c(4, 1, 3), c("lines", "null", "lines")),
+			heights = unit(c(totalLinesTop, 1, 3), c("lines", "null", "lines")),
 			widths = unit(c(.25, 1, .25), c("inches", "null", "inches"))
 		)
 	))
 	# Top
+	totalLinesTop <- totalLinesTop - 1
 	pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 2))
-	  grid.text(meta1, x = unit(0, "npc"), y = unit(3, "lines"), just = c(0, 1))
-	  grid.text(meta2, x = unit(0, "npc"), y = unit(2, "lines"), just = c(0, 1))
+	  grid.text(meta, x = unit(0, "npc"), y = unit(totalLinesTop, "lines"), just = c(0, 1))
+	  grid.text(metaR, x = unit(1, "npc"), y = unit(totalLinesTop, "lines"), just = c(1, 1))
 	  if(!is.null(theTitle))
-	  grid.text(theTitle, x = unit(0.5, "npc"), y = unit(1, "lines"), just = c(0.5, 1))
+	  grid.text(theTitle, x = unit(0.5, "npc"), y = unit(totalLinesTop-metaLines, "lines"), just = c(0.5, 1))
 	popViewport()
 	
 	# Bottom
