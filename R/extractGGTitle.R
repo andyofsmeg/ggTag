@@ -18,7 +18,9 @@ extractGGTitle <- function(object){
 #' @return The original object, minus the title
 #' @export
 deleteGGTitle <- function(object){
-  object$labels$title <- NULL
-  object$labels$subtitle <- NULL
+  args <- object$labels[!names(object$labels) %in% c("title", "subtitle")]
+  # args <- ggplot2:::rename_aes(args)
+  object <- object + structure(args, class = "labels")
+  object <- object + ggplot2::labs(title = NULL, subtitle = NULL)
   object
 }
