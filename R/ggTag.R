@@ -2,7 +2,7 @@
 #' 
 #' Tag a ggplot2 or lattice (or any grid) object with meta information by nesting it within a grid framework
 #' @param object A ggplot or lattice object
-#' @param extractTitle Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.
+#' @param useGGTitle Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.
 #' @param title Character.You own title.  Overridden if extractTitle is TRUE.
 #' @param meta Lines of meta information
 #' @param date Logical. Defaults to TRUE. 
@@ -42,13 +42,13 @@
 #' ggTag(myPlot, meta = "Protocol: 123456\nStudy: 123456", 
 #'       date = TRUE, username = TRUE, path = FALSE)
 #' }
-ggTag <- function(object, extractTitle = TRUE, title, meta = "", 
+ggTag <- function(object, useGGTitle = TRUE, title, meta = "", 
                   date = TRUE, username = TRUE, path = TRUE,
-                  dateFormat = "%d%b%Y %H%M"){
+                  dateFormat = "%d%b%Y %H:%M"){
   
   # Redefine text to print to plot
   # Ensure appropriate title then count title lines
-  if(extractTitle) {
+  if(useGGTitle) {
     theTitle <- extractGGTitle(object)
     object <- deleteGGTitle(object)
   }
@@ -59,7 +59,7 @@ ggTag <- function(object, extractTitle = TRUE, title, meta = "",
 
   # Title and meta lines
   # TODO: break into separate script and write tests
-  totalLinesTop <- titleLines + metaLines
+  totalLinesTop <- titleLines + metaLines + 1.5
 
 	userID <- ifelse(username, Sys.getenv("USERNAME"), "")
 	projectPath <- ifelse(path, getwd(), "")
@@ -76,6 +76,7 @@ ggTag <- function(object, extractTitle = TRUE, title, meta = "",
 		)
 	))
 	# Top
+	totalLinesTop <- totalLinesTop - 1
 	pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 2))
 	  grid.text(meta, x = unit(0, "npc"), y = unit(totalLinesTop, "lines"), just = c(0, 1))
 	  if(!is.null(theTitle))
