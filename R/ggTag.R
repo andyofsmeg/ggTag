@@ -4,11 +4,10 @@
 #' @param object A ggplot or lattice object
 #' @param useGGTitle Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.
 #' @param title Character.You own title.  Overridden if extractTitle is TRUE.
-#' @param meta Lines of meta information to display in the top left
-#' @param metaR Lines of meta information to display in the top right
+#' @param meta Lines of meta information
 #' @param date Logical. Defaults to TRUE. 
 #' @param username Logical. Defaults to TRUE.
-#' @param path Logical, else a custom character file path. Defaults to TRUE.
+#' @param path Logical. Defaults to TRUE.
 #' @param dateFormat Character.  R date format to use for the date.
 #' @import grid
 #' @export
@@ -43,7 +42,7 @@
 #' ggTag(myPlot, meta = "Protocol: 123456\nStudy: 123456", 
 #'       date = TRUE, username = TRUE, path = FALSE)
 #' }
-ggTag <- function(object, useGGTitle = TRUE, title, meta = "", metaR = "Page 1 of 1",
+ggTag <- function(object, useGGTitle = TRUE, title, meta = "", 
                   date = TRUE, username = TRUE, path = TRUE,
                   dateFormat = "%d%b%Y %H:%M"){
   
@@ -63,8 +62,7 @@ ggTag <- function(object, useGGTitle = TRUE, title, meta = "", metaR = "Page 1 o
   totalLinesTop <- titleLines + metaLines + 1.5
 
 	userID <- ifelse(username, Sys.getenv("USERNAME"), "")
-	if(class(path) == "logical") projectPath <- ifelse(path, getwd(), "")
-	else projectPath <- path
+	projectPath <- ifelse(path, getwd(), "")
 	idAndProjectPath <- paste(userID, projectPath, sep = ": ")
 	theTime <- Sys.time()
 	theTime <- toupper(format(theTime, dateFormat))
@@ -81,7 +79,6 @@ ggTag <- function(object, useGGTitle = TRUE, title, meta = "", metaR = "Page 1 o
 	totalLinesTop <- totalLinesTop - 1
 	pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 2))
 	  grid.text(meta, x = unit(0, "npc"), y = unit(totalLinesTop, "lines"), just = c(0, 1))
-	  grid.text(metaR, x = unit(1, "npc"), y = unit(totalLinesTop, "lines"), just = c(1, 1))
 	  if(!is.null(theTitle))
 	  grid.text(theTitle, x = unit(0.5, "npc"), y = unit(totalLinesTop-metaLines, "lines"), just = c(0.5, 1))
 	popViewport()
