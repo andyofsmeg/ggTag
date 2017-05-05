@@ -1,13 +1,14 @@
 Package: ggTag
 Title: A package to allow ggplot2 or lattice graphics to be "tagged" with meta information
-Version: 0.1
+Version: 0.4
 Author: Andy Nicholls <anicholls@mango-solutions.com>
 Maintainer: Andy Nicholls <anicholls@mango-solutions.com>
 Authors@R: person("Andy", "Nicholls", email = "anicholls@emango-solutions.com", role = c("aut", "cre"))
 Description: A package to allow ggplot2 or lattice graphics to be "tagged" with meta information.  The primary purpose of the pakcage is to take existing plots and wraps them in a grid fraemwork with metadata surrounding the plot.
 Depends: 
     R (>= 3.0.0),
-	grid
+	grid,
+	stringr
 Suggests: 
     ggplot2, 
 	mangoTraining,

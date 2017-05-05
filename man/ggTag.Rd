@@ -4,25 +4,28 @@
 \alias{ggTag}
 \title{Tag a ggplot2 graphic with meta information}
 \usage{
-ggTag(object, extractTitle = TRUE, title, meta1 = "", meta2 = "",
-  date = TRUE, username = TRUE, path = TRUE)
+ggTag(object, raster = FALSE, useGGTitle = TRUE, title, meta = "",
+  date = TRUE, username = TRUE, path = TRUE,
+  dateFormat = "\%d\%b\%Y \%H:\%M")
 }
 \arguments{
 \item{object}{A ggplot or lattice object}
 
-\item{extractTitle}{Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.}
+\item{raster}{Logical. Defaults to FALSE. Set to TRUE if input is a matrix to raster.}
+
+\item{useGGTitle}{Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.}
 
 \item{title}{Character.You own title.  Overridden if extractTitle is TRUE.}
 
-\item{meta1}{A line of meta information}
-
-\item{meta2}{A second line of meta information to appear below the first}
+\item{meta}{Lines of meta information}
 
 \item{date}{Logical. Defaults to TRUE.}
 
 \item{username}{Logical. Defaults to TRUE.}
 
 \item{path}{Logical. Defaults to TRUE.}
+
+\item{dateFormat}{Character.  R date format to use for the date.}
 }
 \description{
 Tag a ggplot2 or lattice (or any grid) object with meta information by nesting it within a grid framework
@@ -46,9 +49,9 @@ myPlot <- qplot(Weight, Height, data = demoData, facets = Sex ~ Smokes,
   xlab = "\\nWeight",
   ylab = "Height\\n"
 )
-myPlot <- myPlot + theme_bw() 
-myPlot <- myPlot + 
-  theme(strip.text.y = element_text(), 
+myPlot <- myPlot + theme_bw()
+myPlot <- myPlot +
+  theme(strip.text.y = element_text(),
         strip.background = element_rect(fill = NA, linetype = 0),
         panel.grid.minor = element_line(colour = NA),
         panel.grid.major = element_line(colour = NA)
@@ -56,7 +59,7 @@ myPlot <- myPlot +
 myPlot
 
 
-ggTag(myPlot, meta1 = "Protocol: 123456", meta2 = "Study: 123456", 
+ggTag(myPlot, meta = "Protocol: 123456\\nStudy: 123456",
       date = TRUE, username = TRUE, path = FALSE)
 }
 }
