@@ -4,7 +4,8 @@
 #' @param object A ggplot or lattice object
 #' @param useGGTitle Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.
 #' @param title Character.You own title.  Overridden if extractTitle is TRUE.
-#' @param meta Lines of meta information
+#' @param meta Lines of meta information to display in the top lef.  Defaults to NULL.
+#' @param metaRight Lines of meta information to display in the top right.  Defaults to NULL.
 #' @param date Logical. Defaults to TRUE.
 #' @param username Logical. Defaults to TRUE.
 #' @param path Logical. Defaults to TRUE.
@@ -41,10 +42,13 @@
 #' myPlot
 #'
 #'
-#' ggTag(myPlot, meta = "Protocol: 123456\nStudy: 123456",
+#' ggTag(myPlot, 
+#'       meta = "Protocol: 123456\nPopulation: Intent-to-Treat",
+#'       metaRight = "Page 1 of 1",    
 #'       date = TRUE, username = TRUE, path = FALSE)
 #' }
-ggTag <- function(object, raster = FALSE, useGGTitle = TRUE, title, meta = "",
+ggTag <- function(object, raster = FALSE, useGGTitle = TRUE, 
+                  title, meta = NULL, metaRight = NULL,
                   date = TRUE, username = TRUE, path = TRUE,
                   dateFormat = "%d%b%Y %H:%M"){
 
@@ -57,7 +61,9 @@ ggTag <- function(object, raster = FALSE, useGGTitle = TRUE, title, meta = "",
   else theTitle <- title
   # Count title lines
   titleLines <- length(unlist(str_split(theTitle, "\\n")))
-  metaLines <- length(unlist(str_split(meta, "\\n")))
+  metaLeftLines <- length(unlist(str_split(meta, "\\n")))
+  metaRightLines <- length(unlist(str_split(metaRight, "\\n")))
+  metaLines <- max(metaLeftLines, metaRightLines)
 
   # Title and meta lines
   # TODO: break into separate script and write tests
@@ -81,6 +87,7 @@ ggTag <- function(object, raster = FALSE, useGGTitle = TRUE, title, meta = "",
 	totalLinesTop <- totalLinesTop - 1
 	pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 2))
 	  grid.text(meta, x = unit(0, "npc"), y = unit(totalLinesTop, "lines"), just = c(0, 1))
+	  grid.text(metaRight, x = unit(1, "npc"), y = unit(totalLinesTop, "lines"), just = c(1, 1))
 	  if(!is.null(theTitle))
 	  grid.text(theTitle, x = unit(0.5, "npc"), y = unit(totalLinesTop-metaLines, "lines"), just = c(0.5, 1))
 	popViewport()

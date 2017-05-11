@@ -4,8 +4,8 @@
 \alias{ggTag}
 \title{Tag a ggplot2 graphic with meta information}
 \usage{
-ggTag(object, raster = FALSE, useGGTitle = TRUE, title, meta = "",
-  date = TRUE, username = TRUE, path = TRUE,
+ggTag(object, raster = FALSE, useGGTitle = TRUE, title, meta = NULL,
+  metaRight = NULL, date = TRUE, username = TRUE, path = TRUE,
   dateFormat = "\%d\%b\%Y \%H:\%M")
 }
 \arguments{
@@ -17,7 +17,9 @@ ggTag(object, raster = FALSE, useGGTitle = TRUE, title, meta = "",
 
 \item{title}{Character.You own title.  Overridden if extractTitle is TRUE.}
 
-\item{meta}{Lines of meta information}
+\item{meta}{Lines of meta information to display in the top lef.  Defaults to NULL.}
+
+\item{metaRight}{Lines of meta information to display in the top right.  Defaults to NULL.}
 
 \item{date}{Logical. Defaults to TRUE.}
 
@@ -59,7 +61,9 @@ myPlot <- myPlot +
 myPlot
 
 
-ggTag(myPlot, meta = "Protocol: 123456\\nStudy: 123456",
+ggTag(myPlot, 
+      meta = "Protocol: 123456\\nPopulation: Intent-to-Treat",
+      metaRight = "Page 1 of 1",    
       date = TRUE, username = TRUE, path = FALSE)
 }
 }
