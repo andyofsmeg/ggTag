@@ -16,11 +16,14 @@ extractGGTitle <- function(object){
 #' Remove the title from a ggplot object
 #' @param object A ggplot or lattice object 
 #' @return The original object, minus the title
+#' @import ggplot2
 #' @export
 deleteGGTitle <- function(object){
-  args <- object$labels[!names(object$labels) %in% c("title", "subtitle")]
-  # args <- ggplot2:::rename_aes(args)
-  object <- object + structure(args, class = "labels")
-  object <- object + ggplot2::labs(title = NULL, subtitle = NULL)
+  plotLabels <- object$labels
+  if(!is.null(plotLabels$title)) plotLabels$title <- NULL
+  plotLabels <- structure(plotLabels, class = "labels")
+  # Return ggplot object without title
+  object$labels <- NULL
+  object <- object + labs(plotLabels)
   object
 }

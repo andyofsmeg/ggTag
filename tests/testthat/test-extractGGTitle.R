@@ -12,5 +12,5 @@ test_that("Can extract a title", {
 })
 
 test_that("Can delete a title", {
-  expect_equal(deleteGGTitle(testGraphWTitle), testGraph)
+  expect_equal(deleteGGTitle(testGraphWTitle)$labels, testGraph$labels)
 })

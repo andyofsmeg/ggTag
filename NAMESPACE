@@ -3,5 +3,6 @@
 export(deleteGGTitle)
 export(extractGGTitle)
 export(ggTag)
+import(ggplot2)
 import(grid)
 importFrom(stringr,str_split)
