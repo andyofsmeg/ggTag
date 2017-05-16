@@ -95,7 +95,7 @@ ggTag <- function(object, raster = FALSE, useGGTitle = TRUE,
 	# Bottom
 	pushViewport(viewport(layout.pos.row = 3, layout.pos.col = 2))
 	  grid.text(idAndProjectPath, x = unit(0, "npc"), y = unit(1, "lines"), just = c(0, 0))
-	  grid.text(theTime, x = unit(1, "npc"), y = unit(1, "lines"), just = c(1, 0))
+	  if(date) addDateTime(dateFormat = dateFormat)
 	popViewport()
 
 	# Main
