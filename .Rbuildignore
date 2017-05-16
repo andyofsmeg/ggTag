@@ -3,3 +3,4 @@
 ^test-ggTag.R$
 ^build.R
 
+^\.travis\.yml$
