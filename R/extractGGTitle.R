@@ -20,7 +20,10 @@ extractGGTitle <- function(object){
 #' @export
 deleteGGTitle <- function(object){
   plotLabels <- object$labels
-  if(!is.null(plotLabels$title)) plotLabels$title <- NULL
+  if(!is.null(plotLabels$title)) {
+    plotLabels$title <- NULL
+    plotLabels$subtitle <- NULL
+  }
   plotLabels <- structure(plotLabels, class = "labels")
   # Return ggplot object without title
   object$labels <- NULL
