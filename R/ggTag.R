@@ -59,15 +59,11 @@ ggTag <- function(object, raster = FALSE, useGGTitle = TRUE,
     object <- deleteGGTitle(object)
   }
   else theTitle <- title
-  # Count title lines
-  titleLines <- length(unlist(str_split(theTitle, "\\n")))
-  metaLeftLines <- length(unlist(str_split(meta, "\\n")))
-  metaRightLines <- length(unlist(str_split(metaRight, "\\n")))
-  metaLines <- max(metaLeftLines, metaRightLines)
-
-  # Title and meta lines
-  # TODO: break into separate script and write tests
-  totalLinesTop <- titleLines + metaLines + 1.5
+  
+  # Title and meta lines count
+  titleLines <- countMeta(theTitle)
+  metaLines <- countMetaMulti(meta, metaRight)
+  totalLinesTop <- metaLines + titleLines + 1.5
 
 	userID <- ifelse(username, Sys.getenv("USERNAME"), "")
 	projectPath <- ifelse(is.logical(path) && path, getwd(), path)
@@ -108,7 +104,6 @@ ggTag <- function(object, raster = FALSE, useGGTitle = TRUE,
 	}
 	popViewport()
 }
-
 
 
 
