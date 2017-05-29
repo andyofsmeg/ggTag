@@ -69,10 +69,6 @@ ggTag <- function(object, raster = FALSE, useGGTitle = TRUE,
   # TODO: break into separate script and write tests
   totalLinesTop <- titleLines + metaLines + 1.5
 
-	userID <- ifelse(username, Sys.getenv("USERNAME"), "")
-	projectPath <- ifelse(is.logical(path) && path, getwd(), path)
-	idAndProjectPath <- paste(userID, projectPath, sep = ": ")
-
 	# Plot
 	grid.newpage()
 	pushViewport(viewport(
@@ -92,7 +88,7 @@ ggTag <- function(object, raster = FALSE, useGGTitle = TRUE,
 
 	# Bottom
 	pushViewport(viewport(layout.pos.row = 3, layout.pos.col = 2))
-	  grid.text(idAndProjectPath, x = unit(0, "npc"), y = unit(1, "lines"), just = c(0, 0))
+	  addUserPath(username, path)
 	  if(date) addDateTime(dateFormat = dateFormat)
 	popViewport()
 

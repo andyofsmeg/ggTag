@@ -11,6 +11,20 @@ addDateTime <- function(dateFormat = "%d%b%Y %H:%M"){
   
 }
 
+#' Add path to plot
+#' 
+#' @param userID
+#' @param path
+#' 
+addUserPath <- function(userID, path){
+  
+  idAndProjectPath <- createUserPath(userID, path)
+  
+  if(idAndProjectPath != "")
+    grid.text(idAndProjectPath, x = unit(0, "npc"), y = unit(1, "lines"), just = c(0, 0))
+  
+}
+
 #' Count meta lines
 #' 
 #' Function to count the number of lines of meta information
@@ -35,4 +49,37 @@ countMetaMulti <- function(...){
   metaCount <- lapply(metaList, countMeta)
   maxMetaCount <- max(unlist(metaCount))
   
+}
+
+
+#' Create User & Path String
+#'
+#' @param userID logical. Should the user ID be included with the path
+#' @param path logical or character. If logical, should current working directory 
+#' be added as the path. If character, the path to be included.
+#'
+createUserPath <- function(userID, path){
+
+  # Convert logical to correct path
+  path <- switch(as.character(path), 
+                 "TRUE" = getwd(),
+                 "FALSE" = "",
+                 path)
+  
+  # Combinations of path & userID
+  if(userID & path != ""){
+  
+    path <- paste(Sys.getenv("USERNAME"), path, sep = ":")
+      
+  } else if(userID & path == ""){
+  
+    path <- Sys.getenv("USERNAME") 
+    
+  } else if(!userID & path == ""){
+  
+    path <- ""  
+    
+  }
+  
+  path
 }
