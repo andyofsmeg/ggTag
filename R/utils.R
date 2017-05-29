@@ -1,30 +1,3 @@
-#' Add time to plot
-#'
-#' @param dateFormat Character.  R date format to use for the date.
-#' 
-addDateTime <- function(dateFormat = "%d%b%Y %H:%M"){
-  
-  theTime <- Sys.time()
-  theTime <- toupper(format(theTime, dateFormat))
-  
-  grid.text(theTime, x = unit(1, "npc"), y = unit(1, "lines"), just = c(1, 0))
-  
-}
-
-#' Add path to plot
-#' 
-#' @param userID
-#' @param path
-#' 
-addUserPath <- function(userID = TRUE, path = TRUE){
-  
-  idAndProjectPath <- createUserPath(userID, path)
-  
-  if(idAndProjectPath != "")
-    grid.text(idAndProjectPath, x = unit(0, "npc"), y = unit(1, "lines"), just = c(0, 0))
-  
-}
-
 #' Count meta lines
 #' 
 #' Function to count the number of lines of meta information

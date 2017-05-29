@@ -2,68 +2,38 @@
 % Please edit documentation in R/ggTag.R
 \name{ggTag}
 \alias{ggTag}
-\title{Tag a ggplot2 graphic with meta information}
+\title{#' Tag a ggplot2 graphic with meta information}
 \usage{
-ggTag(object, raster = FALSE, useGGTitle = TRUE, title, meta = NULL,
-  metaRight = NULL, date = TRUE, username = TRUE, path = TRUE,
-  dateFormat = "\%d\%b\%Y \%H:\%M")
+ggTag(object, topLeft = NULL, topRight = NULL, bottomLeft = NULL,
+  bottomRight = NULL)
 }
 \arguments{
 \item{object}{A ggplot or lattice object}
 
-\item{raster}{Logical. Defaults to FALSE. Set to TRUE if input is a matrix to raster.}
+\item{topLeft}{Grid object}
 
-\item{useGGTitle}{Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.}
+\item{topRight}{Grid object}
 
-\item{title}{Character.You own title.  Overridden if extractTitle is TRUE.}
+\item{bottomLeft}{Grid object}
 
-\item{meta}{Lines of meta information to display in the top lef.  Defaults to NULL.}
-
-\item{metaRight}{Lines of meta information to display in the top right.  Defaults to NULL.}
-
-\item{date}{Logical. Defaults to TRUE.}
-
-\item{username}{Logical. Defaults to TRUE.}
-
-\item{path}{Logical. Defaults to TRUE.}
-
-\item{dateFormat}{Character.  R date format to use for the date.}
+\item{bottomRight}{Grid object}
 }
 \description{
 Tag a ggplot2 or lattice (or any grid) object with meta information by nesting it within a grid framework
 }
 \examples{
 {
-library(grid)
-library(ggplot2)
-library(mangoTraining)
-# Layout used:
-grid.show.layout(
-grid.layout(nrow = 3, ncol = 3,
-	heights = unit(c(4, 1, 3), c("lines", "null", "lines")),
-	widths = unit(c(.25, 1, .25), c("inches", "null", "inches"))
-)
-)
 
-# Create ggplot2 graphic
 myPlot <- qplot(Weight, Height, data = demoData, facets = Sex ~ Smokes,
   main = "Scatter Plot of Height against Weight\\nby Sex and Smoking Status\\n",
   xlab = "\\nWeight",
   ylab = "Height\\n"
 )
-myPlot <- myPlot + theme_bw()
-myPlot <- myPlot +
-  theme(strip.text.y = element_text(),
-        strip.background = element_rect(fill = NA, linetype = 0),
-        panel.grid.minor = element_line(colour = NA),
-        panel.grid.major = element_line(colour = NA)
-  )
-myPlot
-
 
 ggTag(myPlot, 
-      meta = "Protocol: 123456\\nPopulation: Intent-to-Treat",
-      metaRight = "Page 1 of 1",    
-      date = TRUE, username = TRUE, path = FALSE)
+  bottomLeft = addUserPath(),
+  bottomRight = addDateTime()
+ )
+
 }
 }

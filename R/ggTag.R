@@ -1,109 +1,43 @@
-#' Tag a ggplot2 graphic with meta information
+#' #' Tag a ggplot2 graphic with meta information
 #'
 #' Tag a ggplot2 or lattice (or any grid) object with meta information by nesting it within a grid framework
 #' @param object A ggplot or lattice object
-#' @param useGGTitle Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.
-#' @param title Character.You own title.  Overridden if extractTitle is TRUE.
-#' @param meta Lines of meta information to display in the top lef.  Defaults to NULL.
-#' @param metaRight Lines of meta information to display in the top right.  Defaults to NULL.
-#' @param date Logical. Defaults to TRUE.
-#' @param username Logical. Defaults to TRUE.
-#' @param path Logical. Defaults to TRUE.
-#' @param dateFormat Character.  R date format to use for the date.
-#' @param raster Logical. Defaults to FALSE. Set to TRUE if input is a matrix to raster.
+#' @param topLeft Grid object  
+#' @param topRight Grid object
+#' @param bottomLeft Grid object
+#' @param bottomRight Grid object
 #' @import grid
 #' @importFrom stringr str_split
-#' @export
 #' @examples{
-#' library(grid)
-#' library(ggplot2)
-#' library(mangoTraining)
-#' # Layout used:
-#' grid.show.layout(
-#'	grid.layout(nrow = 3, ncol = 3,
-#'		heights = unit(c(4, 1, 3), c("lines", "null", "lines")),
-#'		widths = unit(c(.25, 1, .25), c("inches", "null", "inches"))
-#'	)
-#' )
-#'
-#' # Create ggplot2 graphic
+#' 
 #' myPlot <- qplot(Weight, Height, data = demoData, facets = Sex ~ Smokes,
 #'   main = "Scatter Plot of Height against Weight\nby Sex and Smoking Status\n",
 #'   xlab = "\nWeight",
 #'   ylab = "Height\n"
 #' )
-#' myPlot <- myPlot + theme_bw()
-#' myPlot <- myPlot +
-#'   theme(strip.text.y = element_text(),
-#'         strip.background = element_rect(fill = NA, linetype = 0),
-#'         panel.grid.minor = element_line(colour = NA),
-#'         panel.grid.major = element_line(colour = NA)
-#'   )
-#' myPlot
-#'
 #'
 #' ggTag(myPlot, 
-#'       meta = "Protocol: 123456\nPopulation: Intent-to-Treat",
-#'       metaRight = "Page 1 of 1",    
-#'       date = TRUE, username = TRUE, path = FALSE)
+#'   bottomLeft = addUserPath(),
+#'   bottomRight = addDateTime()
+#'  )
+#' 
 #' }
-ggTag <- function(object, raster = FALSE, useGGTitle = TRUE, 
-                  title, meta = NULL, metaRight = NULL,
-                  date = TRUE, username = TRUE, path = TRUE,
-                  dateFormat = "%d%b%Y %H:%M"){
-
-  # Redefine text to print to plot
-  # Ensure appropriate title then count title lines
-  if(useGGTitle) {
-    theTitle <- extractGGTitle(object)
-    object <- deleteGGTitle(object)
-  }
-  else theTitle <- title
-  # Count title lines
-  titleLines <- length(unlist(str_split(theTitle, "\\n")))
-  metaLeftLines <- length(unlist(str_split(meta, "\\n")))
-  metaRightLines <- length(unlist(str_split(metaRight, "\\n")))
-  metaLines <- max(metaLeftLines, metaRightLines)
-
-  # Title and meta lines
-  # TODO: break into separate script and write tests
-  totalLinesTop <- titleLines + metaLines + 1.5
-
-	# Plot
-	grid.newpage()
-	pushViewport(viewport(
-		layout = grid.layout(nrow = 3, ncol = 3,
-			heights = unit(c(totalLinesTop, 1, 3), c("lines", "null", "lines")),
-			widths = unit(c(.25, 1, .25), c("inches", "null", "inches"))
-		)
-	))
-	# Top
-	totalLinesTop <- totalLinesTop - 1
-	pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 2))
-	  grid.text(meta, x = unit(0, "npc"), y = unit(totalLinesTop, "lines"), just = c(0, 1))
-	  grid.text(metaRight, x = unit(1, "npc"), y = unit(totalLinesTop, "lines"), just = c(1, 1))
-	  if(!is.null(theTitle))
-	  grid.text(theTitle, x = unit(0.5, "npc"), y = unit(totalLinesTop-metaLines, "lines"), just = c(0.5, 1))
-	popViewport()
-
-	# Bottom
-	pushViewport(viewport(layout.pos.row = 3, layout.pos.col = 2))
-	  addUserPath(username, path)
-	  if(date) addDateTime(dateFormat = dateFormat)
-	popViewport()
-
-	# Main
-	pushViewport(viewport(layout.pos.row = 2, layout.pos.col = 2))
-	if(!raster){
-	  print(object, newpage = F)
-	}
-	else{
-	  grid.raster(object)
-	}
-	popViewport()
+#' @export
+ggTag <- function(object, topLeft = NULL, topRight = NULL,
+                       bottomLeft = NULL, bottomRight = NULL){
+  
+  createPage()
+  
+  downViewport("topLeft")
+  topLeft
+  seekViewport("topRight")
+  topRight
+  seekViewport("bottomLeft")
+  bottomLeft
+  seekViewport("bottomRight")
+  bottomRight
+  seekViewport("plotRegion")
+  print(object, newpage = FALSE)
+  upViewport(0)
+  
 }
-
-
-
-
-
