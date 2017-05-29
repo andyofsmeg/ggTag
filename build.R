@@ -1,8 +1,8 @@
 # Build script
 
-# # Docs
-# cat("Updating documentation...\n")
-# devtools::document()
+# Docs
+cat("Updating documentation...\n")
+devtools::document()
 
 # Version increment
 cat("Incrementing version number...\n")
@@ -20,10 +20,10 @@ desc[versL] <- paste("Version:", versNum)
 cat("New version number:", versNum, "\n")
 writeLines(desc, "DESCRIPTION")
 
-# # R CMD check
-# cat("Running R CMD check...\n")
-# devtools::check()
-# 
-# cat("Building source...\n")
-# # Build
-# devtools::build()
+# R CMD check
+cat("Running R CMD check...\n")
+devtools::check()
+
+cat("Building source...\n")
+# Build
+devtools::build()
