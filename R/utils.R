@@ -16,7 +16,7 @@ addDateTime <- function(dateFormat = "%d%b%Y %H:%M"){
 #' @param userID
 #' @param path
 #' 
-addUserPath <- function(userID, path){
+addUserPath <- function(userID = TRUE, path = TRUE){
   
   idAndProjectPath <- createUserPath(userID, path)
   
@@ -58,7 +58,7 @@ countMetaMulti <- function(...){
 #' @param path logical or character. If logical, should current working directory 
 #' be added as the path. If character, the path to be included.
 #'
-createUserPath <- function(userID, path){
+createUserPath <- function(userID = TRUE, path = TRUE){
 
   # Convert logical to correct path
   path <- switch(as.character(path), 
