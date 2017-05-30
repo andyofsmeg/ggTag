@@ -1,6 +1,7 @@
 #' #' Tag a ggplot2 graphic with meta information
 #'
-#' Tag a ggplot2 or lattice (or any grid) object with meta information by nesting it within a grid framework
+#' Tag a ggplot2 or lattice (or any grid) object with meta information by 
+#' nesting it within a grid framework
 #' @param object A ggplot or lattice object
 #' @param topLeft Grid object  
 #' @param topRight Grid object
@@ -8,6 +9,7 @@
 #' @param bottomRight Grid object
 #' @import grid
 #' @importFrom stringr str_split
+#' @importFrom ggplot2 qplot
 #' @examples{
 #' 
 #' myPlot <- qplot(Weight, Height, data = demoData, facets = Sex ~ Smokes,
