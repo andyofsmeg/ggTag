@@ -19,7 +19,8 @@ ggTag(object, topLeft = NULL, topRight = NULL, bottomLeft = NULL,
 \item{bottomRight}{Grid object}
 }
 \description{
-Tag a ggplot2 or lattice (or any grid) object with meta information by nesting it within a grid framework
+Tag a ggplot2 or lattice (or any grid) object with meta information by 
+nesting it within a grid framework
 }
 \examples{
 {
