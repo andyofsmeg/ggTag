@@ -24,7 +24,8 @@ nesting it within a grid framework
 }
 \examples{
 {
-
+library(mangoTraining)
+library(ggplot2)
 myPlot <- qplot(Weight, Height, data = demoData, facets = Sex ~ Smokes,
   main = "Scatter Plot of Height against Weight\\nby Sex and Smoking Status\\n",
   xlab = "\\nWeight",

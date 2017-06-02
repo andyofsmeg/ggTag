@@ -9,9 +9,9 @@
 #' @param bottomRight Grid object
 #' @import grid
 #' @importFrom stringr str_split
-#' @importFrom ggplot2 qplot
 #' @examples{
-#' 
+#' library(mangoTraining)
+#' library(ggplot2)
 #' myPlot <- qplot(Weight, Height, data = demoData, facets = Sex ~ Smokes,
 #'   main = "Scatter Plot of Height against Weight\nby Sex and Smoking Status\n",
 #'   xlab = "\nWeight",
