@@ -50,5 +50,6 @@ pharmaTag <- function(object,
   
   ggTag(object, 
         meta = metaLeft, 
-        metaRight = metaRight) 
+        metaRight = metaRight,
+        ...) 
 }
