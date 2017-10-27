@@ -5,8 +5,8 @@
 \title{Tag a ggplot2 graphic with meta information}
 \usage{
 ggTag(object, raster = FALSE, useGGTitle = TRUE, title, meta = NULL,
-  metaRight = NULL, date = TRUE, username = TRUE, path = TRUE,
-  dateFormat = "\%d\%b\%Y \%H:\%M")
+  metaRight = NULL, fontsize = 12, date = TRUE, username = TRUE,
+  path = TRUE, dateFormat = "\%d\%b\%Y \%H:\%M")
 }
 \arguments{
 \item{object}{A ggplot or lattice object}
@@ -20,6 +20,8 @@ ggTag(object, raster = FALSE, useGGTitle = TRUE, title, meta = NULL,
 \item{meta}{Lines of meta information to display in the top lef.  Defaults to NULL.}
 
 \item{metaRight}{Lines of meta information to display in the top right.  Defaults to NULL.}
+
+\item{fontsize}{The font size in pt}
 
 \item{date}{Logical. Defaults to TRUE.}
 

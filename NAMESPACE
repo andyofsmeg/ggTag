@@ -3,6 +3,7 @@
 export(deleteGGTitle)
 export(extractGGTitle)
 export(ggTag)
+export(pharmaTag)
 import(ggplot2)
 import(grid)
 importFrom(stringr,str_split)

@@ -4,10 +4,12 @@
 \alias{addDateTime}
 \title{Add time to plot}
 \usage{
-addDateTime(dateFormat = "\%d\%b\%Y \%H:\%M")
+addDateTime(dateFormat = "\%d\%b\%Y \%H:\%M", fontsize = 12)
 }
 \arguments{
 \item{dateFormat}{Character.  R date format to use for the date.}
+
+\item{fontsize}{The font size in pt}
 }
 \description{
 Add time to plot
