@@ -6,6 +6,7 @@
 #' @param title Character.You own title.  Overridden if extractTitle is TRUE.
 #' @param meta Lines of meta information to display in the top lef.  Defaults to NULL.
 #' @param metaRight Lines of meta information to display in the top right.  Defaults to NULL.
+#' @param fontsize The font size in pt
 #' @param date Logical. Defaults to TRUE.
 #' @param username Logical. Defaults to TRUE.
 #' @param path Logical. Defaults to TRUE.
@@ -49,6 +50,7 @@
 #' }
 ggTag <- function(object, raster = FALSE, useGGTitle = TRUE, 
                   title, meta = NULL, metaRight = NULL,
+                  fontsize = 12,
                   date = TRUE, username = TRUE, path = TRUE,
                   dateFormat = "%d%b%Y %H:%M"){
 
@@ -76,16 +78,25 @@ ggTag <- function(object, raster = FALSE, useGGTitle = TRUE,
 	# Top
 	totalLinesTop <- totalLinesTop - 1
 	pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 2))
-	  grid.text(meta, x = unit(0, "npc"), y = unit(totalLinesTop, "lines"), just = c(0, 1))
-	  grid.text(metaRight, x = unit(1, "npc"), y = unit(totalLinesTop, "lines"), just = c(1, 1))
+	  grid.text(meta, 
+	            x = unit(0, "npc"), 
+	            y = unit(totalLinesTop, "lines"), 
+	            gp=gpar(fontsize=fontsize), just = c(0, 1))
+	  grid.text(metaRight, 
+	            x = unit(1, "npc"), 
+	            y = unit(totalLinesTop, "lines"), 
+	            gp=gpar(fontsize=fontsize), just = c(1, 1))
 	  if(!is.null(theTitle))
-	  grid.text(theTitle, x = unit(0.5, "npc"), y = unit(totalLinesTop-metaLines, "lines"), just = c(0.5, 1))
+	  grid.text(theTitle, 
+	            x = unit(0.5, "npc"), 
+	            y = unit(totalLinesTop-metaLines, "lines"), 
+	            gp=gpar(fontsize=fontsize), just = c(0.5, 1))
 	popViewport()
 
 	# Bottom
 	pushViewport(viewport(layout.pos.row = 3, layout.pos.col = 2))
-	  addUserPath(username, path)
-	  if(date) addDateTime(dateFormat = dateFormat)
+	  addUserPath(username, path, fontsize=fontsize)
+	  if(date) addDateTime(dateFormat = dateFormat, fontsize=fontsize)
 	popViewport()
 
 	# Main

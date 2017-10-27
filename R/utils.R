@@ -1,13 +1,15 @@
 #' Add time to plot
 #'
 #' @param dateFormat Character.  R date format to use for the date.
+#' @param fontsize The font size in pt
 #' 
-addDateTime <- function(dateFormat = "%d%b%Y %H:%M"){
+addDateTime <- function(dateFormat = "%d%b%Y %H:%M", fontsize = 12){
   
   theTime <- Sys.time()
   theTime <- toupper(format(theTime, dateFormat))
   
-  grid.text(theTime, x = unit(1, "npc"), y = unit(1, "lines"), just = c(1, 0))
+  grid.text(theTime, x = unit(1, "npc"), y = unit(1, "lines"), 
+            gp=gpar(fontsize=fontsize), just = c(1, 0))
   
 }
 
@@ -15,13 +17,15 @@ addDateTime <- function(dateFormat = "%d%b%Y %H:%M"){
 #' 
 #' @param userID
 #' @param path
+#' @param fontsize The font size in pt
 #' 
-addUserPath <- function(userID = TRUE, path = TRUE){
+addUserPath <- function(userID = TRUE, path = TRUE, fontsize = 12){
   
   idAndProjectPath <- createUserPath(userID, path)
   
   if(idAndProjectPath != "")
-    grid.text(idAndProjectPath, x = unit(0, "npc"), y = unit(1, "lines"), just = c(0, 0))
+    grid.text(idAndProjectPath, x = unit(0, "npc"), y = unit(1, "lines"), 
+              gp=gpar(fontsize=fontsize), just = c(0, 0))
   
 }
 
