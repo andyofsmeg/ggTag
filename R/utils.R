@@ -15,8 +15,9 @@ addDateTime <- function(dateFormat = "%d%b%Y %H:%M", fontsize = 12){
 
 #' Add path to plot
 #' 
-#' @param userID
-#' @param path
+#' @param userID Logical, should the user ID be included with the path
+#' @param path Logical or character, should the path to the current working directory,
+#' or a provided path, be included.  
 #' @param fontsize The font size in pt
 #' 
 addUserPath <- function(userID = TRUE, path = TRUE, fontsize = 12){

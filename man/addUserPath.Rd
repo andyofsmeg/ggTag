@@ -7,6 +7,11 @@
 addUserPath(userID = TRUE, path = TRUE, fontsize = 12)
 }
 \arguments{
+\item{userID}{Logical, should the user ID be included with the path}
+
+\item{path}{Logical or character, should the path to the current working directory,
+or a provided path, be included.}
+
 \item{fontsize}{The font size in pt}
 }
 \description{
