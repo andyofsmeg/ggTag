@@ -35,3 +35,19 @@ addUserPath <- function(userID = TRUE, path = TRUE){
     grid.text(idAndProjectPath, x = pos$x, y = pos$y, just = pos$just)
   
 }
+
+
+#' Add text to plot
+#' 
+#' Utility function for adding general text as meta-information
+#'
+#' @param text Character.  Text to be added to the plot.
+#' 
+#' @export
+addText <- function(text){
+  
+  pos <- position()
+  
+  grid.text(text, x = pos$x, y = pos$y, just = pos$just)
+  
+}

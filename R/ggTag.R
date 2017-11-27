@@ -20,7 +20,8 @@
 #'
 #' ggTag(myPlot, 
 #'   bottomLeft = addUserPath(),
-#'   bottomRight = addDateTime()
+#'   bottomRight = addDateTime(),
+#'   topLeft = addTest("Project ABC")
 #'  )
 #' 
 #' }

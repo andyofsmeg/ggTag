@@ -34,7 +34,8 @@ myPlot <- qplot(Weight, Height, data = demoData, facets = Sex ~ Smokes,
 
 ggTag(myPlot, 
   bottomLeft = addUserPath(),
-  bottomRight = addDateTime()
+  bottomRight = addDateTime(),
+  topLeft = addTest("Project ABC")
  )
 
 }
