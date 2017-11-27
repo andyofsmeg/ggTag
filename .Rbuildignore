@@ -4,3 +4,4 @@
 ^build.R
 
 ^\.travis\.yml$
+^appveyor\.yml$
