@@ -6,7 +6,13 @@
 #' @export
 extractGGTitle <- function(object){
   ggTitle <- object$labels$title
-  ggTitle
+  ggSubtitle <- object$labels$subtitle
+  if(!is.null(ggSubtitle)){
+    paste(ggTitle, ggSubtitle, sep = "\n")
+  }
+  else{
+    ggTitle
+  }
 }
 
 
