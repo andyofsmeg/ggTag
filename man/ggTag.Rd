@@ -5,8 +5,9 @@
 \title{Tag a ggplot2 graphic with meta information}
 \usage{
 ggTag(object, raster = FALSE, useGGTitle = TRUE, title, meta = NULL,
-  metaRight = NULL, fontsize = 12, date = TRUE, username = TRUE,
-  path = TRUE, dateFormat = "\%d\%b\%Y \%H:\%M")
+  metaRight = NULL, fontsize = 12, theme = NULL, inherit_size = FALSE,
+  date = TRUE, username = TRUE, path = TRUE,
+  dateFormat = "\%d\%b\%Y \%H:\%M")
 }
 \arguments{
 \item{object}{A ggplot or lattice object}
@@ -21,7 +22,11 @@ ggTag(object, raster = FALSE, useGGTitle = TRUE, title, meta = NULL,
 
 \item{metaRight}{Lines of meta information to display in the top right.  Defaults to NULL.}
 
-\item{fontsize}{The font size in pt}
+\item{fontsize}{The font size in pt.}
+
+\item{theme}{An optional ggplot2 theme to use.  Only applies to the current plot, i.e. the main theme is not updated.}
+
+\item{inherit_size}{Logical.  If `TRUE` the value of fontsize is passed through to the selected ggplot2 theme.}
 
 \item{date}{Logical. Defaults to TRUE.}
 
