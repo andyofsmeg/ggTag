@@ -73,7 +73,8 @@ ggTag <- function(object, raster = FALSE, useGGTitle = TRUE,
 		layout = grid.layout(nrow = 3, ncol = 3,
 			heights = unit(c(totalLinesTop, 1, 3), c("lines", "null", "lines")),
 			widths = unit(c(.25, 1, .25), c("inches", "null", "inches"))
-		)
+		),
+		gp = gpar(fontsize=fontsize)
 	))
 	# Top
 	totalLinesTop <- totalLinesTop - 1
