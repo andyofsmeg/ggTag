@@ -6,7 +6,9 @@
 #' @param title Character.You own title.  Overridden if extractTitle is TRUE.
 #' @param meta Lines of meta information to display in the top lef.  Defaults to NULL.
 #' @param metaRight Lines of meta information to display in the top right.  Defaults to NULL.
-#' @param fontsize The font size in pt
+#' @param fontsize The font size in pt.
+#' @param theme An optional ggplot2 theme to use.  Only applies to the current plot, i.e. the main theme is not updated.
+#' @param inherit_size Logical.  If `TRUE` the value of fontsize is passed through to the selected ggplot2 theme.
 #' @param date Logical. Defaults to TRUE.
 #' @param username Logical. Defaults to TRUE.
 #' @param path Logical. Defaults to TRUE.
@@ -56,10 +58,15 @@
 #' }
 ggTag <- function(object, raster = FALSE, useGGTitle = TRUE, 
                   title, meta = NULL, metaRight = NULL,
-                  fontsize = 12,
+                  fontsize = 12, theme = NULL, inherit_size,
                   date = TRUE, username = TRUE, path = TRUE,
                   dateFormat = "%d%b%Y %H:%M"){
 
+  # If theme is specified update the object
+  if(!is.null(theme)){
+    object <- object + theme
+  }
+  
   # Redefine text to print to plot
   # Ensure appropriate title then count title lines
   if(useGGTitle) {

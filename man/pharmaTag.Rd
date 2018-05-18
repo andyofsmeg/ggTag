@@ -23,3 +23,29 @@ pharmaTag(object, protocol = NA, population = NA, page = 1, pages = 1,
 \description{
 A wrapper for `ggTag`, specific to the pharma industry
 }
+\examples{
+{
+library(grid)
+library(ggplot2)
+library(mangoTraining)
+# Layout used:
+
+# Create ggplot2 graphic
+myPlot <- qplot(Weight, Height, data = demoData, facets = Sex ~ Smokes,
+  main = "Scatter Plot of Height against Weight\\nby Sex and Smoking Status\\n",
+  xlab = "\\nWeight",
+  ylab = "Height\\n"
+)
+myPlot <- myPlot + theme_bw()
+myPlot <- myPlot +
+  theme(strip.text.y = element_text(),
+        strip.background = element_rect(fill = NA, linetype = 0),
+        panel.grid.minor = element_line(colour = NA),
+        panel.grid.major = element_line(colour = NA)
+  )
+
+
+pharmaTag(myPlot, fontsize = 8)
+      
+}
+}

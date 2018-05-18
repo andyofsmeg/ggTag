@@ -67,5 +67,11 @@ ggTag(myPlot,
       meta = "Protocol: 123456\\nPopulation: Intent-to-Treat",
       metaRight = "Page 1 of 1",    
       date = TRUE, username = TRUE, path = FALSE)
+      
+# Reduce font size
+ggTag(myPlot, 
+      meta = "Protocol: 123456\\nPopulation: Intent-to-Treat",
+      metaRight = "Page 1 of 1",    
+      date = TRUE, username = TRUE, path = FALSE, fontsize = 8)
 }
 }
