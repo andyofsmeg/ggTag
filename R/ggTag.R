@@ -58,13 +58,18 @@
 #' }
 ggTag <- function(object, raster = FALSE, useGGTitle = TRUE, 
                   title, meta = NULL, metaRight = NULL,
-                  fontsize = 12, theme = NULL, inherit_size,
+                  fontsize = 12, theme = NULL, inherit_size = FALSE,
                   date = TRUE, username = TRUE, path = TRUE,
                   dateFormat = "%d%b%Y %H:%M"){
 
   # If theme is specified update the object
   if(!is.null(theme)){
-    object <- object + theme
+    if(!inherit_size){
+      object <- object + theme()
+    }
+    else{
+      object <- object + theme(base_size = fontsize)
+    }
   }
   
   # Redefine text to print to plot
