@@ -42,15 +42,26 @@
 #'
 #'
 #' ggTag(myPlot, 
-#'       meta = "Protocol: 123456\nPopulation: Intent-to-Treat",
-#'       metaRight = "Page 1 of 1",    
-#'       date = TRUE, username = TRUE, path = FALSE)
+#'       meta = list(top_left = "Protocol: 123456\nPopulation: Intent-to-Treat",
+#'                   top_right = "Page 1 of 1",    
+#'                   bottom_left = paste(Sys.getenv("USERNAME"), getwd()), 
+#'                   bottom_right = date()))
 #'       
 #' # Reduce font size
 #' ggTag(myPlot, 
 #'       meta = list(top_left = "Protocol: 123456\nPopulation: Intent-to-Treat",
-#'                       top_right = "Page 1 of 1",    
-#'       bottom_left = paste(username(), path()), bottom_right = date(), fontsize = 8)
+#'                   top_right = "Page 1 of 1",    
+#'                   bottom_left = paste(Sys.getenv("USERNAME"), getwd()), 
+#'                   bottom_right = date()), 
+#'                   fontsize = 8)
+#'                   
+#'  # Change theme          
+#' ggTag(myPlot, 
+#'       meta = list(top_left = "Protocol: 123456\nPopulation: Intent-to-Treat",
+#'                   top_right = "Page 1 of 1",    
+#'                   bottom_left = paste(Sys.getenv("USERNAME"), getwd()), 
+#'                   bottom_right = date()),
+#'                   theme = theme_grey())       
 #' }
 ggTag <- function(object, raster = FALSE, extractTitle = FALSE, 
                   title = NULL, meta=list(),

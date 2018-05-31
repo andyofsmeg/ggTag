@@ -1,7 +1,6 @@
 #' Add time to plot
 #'
 #' @param date_format Character.  R date format to use for the date.
-#' @param fontsize The font size in pt
 #' 
 addDateTime <- function(date_format = "%d%b%Y %H:%M"){
   

@@ -9,7 +9,7 @@
 #' @param date Logical. Defaults to TRUE.
 #' @param username Logical. Defaults to TRUE.
 #' @param path Logical. Defaults to TRUE.
-#' @param dateFormat Character.  R date format to use for the date.
+#' @param date_format Character.  R date format to use for the date.
 #' @param ... Arguments to pass to `ggTag`
 #' @import grid
 #' @importFrom stringr str_split

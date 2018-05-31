@@ -5,7 +5,8 @@
 \title{Tag a ggplot2 graphic with meta information, specific to phara requirements}
 \usage{
 pharmaTag(object, protocol = NA, population = NA, page = 1, pages = 1,
-  ...)
+  date = TRUE, username = TRUE, path = TRUE,
+  date_format = "\%d\%b\%Y \%H:\%M", ...)
 }
 \arguments{
 \item{object}{A ggplot or lattice object}
@@ -17,6 +18,14 @@ pharmaTag(object, protocol = NA, population = NA, page = 1, pages = 1,
 \item{page}{What is the page?}
 
 \item{pages}{How many pages are there?}
+
+\item{date}{Logical. Defaults to TRUE.}
+
+\item{username}{Logical. Defaults to TRUE.}
+
+\item{path}{Logical. Defaults to TRUE.}
+
+\item{date_format}{Character.  R date format to use for the date.}
 
 \item{...}{Arguments to pass to `ggTag`}
 }
