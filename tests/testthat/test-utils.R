@@ -8,7 +8,7 @@ test_that("Date correctly returned", {
   
   now <- toupper(format(now, "%d%b%Y"))
   
-  expect_equal(dt$label, now)
+  expect_equal(dt, now)
   
 })
 

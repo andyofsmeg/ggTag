@@ -1,34 +1,17 @@
 #' Add time to plot
 #'
-#' @param dateFormat Character.  R date format to use for the date.
+#' @param date_format Character.  R date format to use for the date.
 #' @param fontsize The font size in pt
 #' 
-addDateTime <- function(dateFormat = "%d%b%Y %H:%M", fontsize = 12){
+addDateTime <- function(date_format = "%d%b%Y %H:%M"){
   
   theTime <- Sys.time()
-  theTime <- toupper(format(theTime, dateFormat))
+  theTime <- toupper(format(theTime, date_format))
   
-  grid.text(theTime, x = unit(1, "npc"), y = unit(1, "lines"), 
-            gp=gpar(fontsize=fontsize), just = c(1, 0))
+  theTime
   
 }
 
-#' Add path to plot
-#' 
-#' @param userID Logical, should the user ID be included with the path
-#' @param path Logical or character, should the path to the current working directory,
-#' or a provided path, be included.  
-#' @param fontsize The font size in pt
-#' 
-addUserPath <- function(userID = TRUE, path = TRUE, fontsize = 12){
-  
-  idAndProjectPath <- createUserPath(userID, path)
-  
-  if(idAndProjectPath != "")
-    grid.text(idAndProjectPath, x = unit(0, "npc"), y = unit(1, "lines"), 
-              gp=gpar(fontsize=fontsize), just = c(0, 0))
-  
-}
 
 #' Count meta lines
 #' 

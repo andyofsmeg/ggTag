@@ -4,15 +4,10 @@
 #' @param object A ggplot or lattice object
 #' @param useGGTitle Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.
 #' @param title Character.You own title.  Overridden if extractTitle is TRUE.
-#' @param meta Lines of meta information to display in the top lef.  Defaults to NULL.
-#' @param metaRight Lines of meta information to display in the top right.  Defaults to NULL.
+#' @param meta List containing meta information to include in the 4 corners of the plot: top_left, top_right, bottom_left, bottom_right
 #' @param fontsize The font size in pt.
 #' @param theme An optional ggplot2 theme to use.  Only applies to the current plot, i.e. the main theme is not updated.
 #' @param inherit_size Logical.  If `TRUE` the value of fontsize is passed through to the selected ggplot2 theme.
-#' @param date Logical. Defaults to TRUE.
-#' @param username Logical. Defaults to TRUE.
-#' @param path Logical. Defaults to TRUE.
-#' @param dateFormat Character.  R date format to use for the date.
 #' @param raster Logical. Defaults to FALSE. Set to TRUE if input is a matrix to raster.
 #' @import grid
 #' @importFrom stringr str_split
@@ -52,15 +47,13 @@
 #'       
 #' # Reduce font size
 #' ggTag(myPlot, 
-#'       meta = "Protocol: 123456\nPopulation: Intent-to-Treat",
-#'       metaRight = "Page 1 of 1",    
-#'       date = TRUE, username = TRUE, path = FALSE, fontsize = 8)
+#'       meta = list(top_left = "Protocol: 123456\nPopulation: Intent-to-Treat",
+#'                       top_right = "Page 1 of 1",    
+#'       bottom_left = paste(username(), path()), bottom_right = date(), fontsize = 8)
 #' }
 ggTag <- function(object, raster = FALSE, useGGTitle = TRUE, 
-                  title, meta = NULL, metaRight = NULL,
-                  fontsize = 12, theme = NULL, inherit_size = FALSE,
-                  date = TRUE, username = TRUE, path = TRUE,
-                  dateFormat = "%d%b%Y %H:%M"){
+                  title, meta=list(),
+                  fontsize = 12, theme = NULL, inherit_size = FALSE){
 
   # If theme is specified update the object
   if(!is.null(theme)){
@@ -82,8 +75,8 @@ ggTag <- function(object, raster = FALSE, useGGTitle = TRUE,
   
   # Title and meta lines
   titleLines <- countMeta(theTitle)
-  metaLines <- countMetaMulti(meta, metaRight)
-  totalLinesTop <- metaLines + titleLines + 1.5
+  metaLinesTop <- countMetaMulti(meta$top_left, meta$top_right)
+  totalLinesTop <- metaLinesTop + titleLines + 1.5
   
 	# Plot
 	grid.newpage()
@@ -97,25 +90,36 @@ ggTag <- function(object, raster = FALSE, useGGTitle = TRUE,
 	# Top
 	totalLinesTop <- totalLinesTop - 1
 	pushViewport(viewport(layout.pos.row = 1, layout.pos.col = 2))
-	  grid.text(meta, 
+	  grid.text(meta$top_left, 
 	            x = unit(0, "npc"), 
 	            y = unit(totalLinesTop, "lines"), 
 	            gp=gpar(fontsize=fontsize), just = c(0, 1))
-	  grid.text(metaRight, 
+	  grid.text(meta$top_right, 
 	            x = unit(1, "npc"), 
 	            y = unit(totalLinesTop, "lines"), 
 	            gp=gpar(fontsize=fontsize), just = c(1, 1))
 	  if(!is.null(theTitle))
 	  grid.text(theTitle, 
 	            x = unit(0.5, "npc"), 
-	            y = unit(totalLinesTop-metaLines, "lines"), 
+	            y = unit(totalLinesTop-metaLinesTop, "lines"), 
 	            gp=gpar(fontsize=fontsize), just = c(0.5, 1))
 	popViewport()
 
 	# Bottom
+	#TODO add footnote functionality
+	footLines <- 0
+	metaLinesBottom <- countMetaMulti(meta$bottom_left, meta$bottom_right)
+	totalLinesBottom <- metaLinesBottom + footLines + 0.5
+	
 	pushViewport(viewport(layout.pos.row = 3, layout.pos.col = 2))
-	  addUserPath(username, path, fontsize=fontsize)
-	  if(date) addDateTime(dateFormat = dateFormat, fontsize=fontsize)
+	grid.text(meta$bottom_left, 
+	          x = unit(0, "npc"), 
+	          y = unit(totalLinesBottom, "lines"), 
+	          gp=gpar(fontsize=fontsize), just = c(0, 0))
+	grid.text(meta$bottom_right, 
+	          x = unit(1, "npc"), 
+	          y = unit(totalLinesBottom, "lines"), 
+	          gp=gpar(fontsize=fontsize), just = c(1, 0))
 	popViewport()
 
 	# Main
