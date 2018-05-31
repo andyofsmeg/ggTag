@@ -12,8 +12,7 @@ ggTag(object, raster = FALSE, extractTitle = FALSE, title = NULL,
 
 \item{raster}{Logical. Defaults to FALSE. Set to TRUE if input is a matrix to raster.}
 
-\item{extractTitle}{Logical. Defaults to FALSE. Extract the title from the graph and use as plot title.
-Currently only implemented for ggplot2 graphics.}
+\item{extractTitle}{Logical. Defaults to FALSE. Extract the title from the graph and use as plot title.}
 
 \item{title}{Character.You own title.  Overridden if extractTitle is TRUE.}
 

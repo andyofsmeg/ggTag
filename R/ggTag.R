@@ -3,7 +3,6 @@
 #' Tag a ggplot2 or lattice (or any grid) object with meta information by nesting it within a grid framework
 #' @param object A ggplot or lattice object
 #' @param extractTitle Logical. Defaults to FALSE. Extract the title from the graph and use as plot title.  
-#' Currently only implemented for ggplot2 graphics.
 #' @param title Character.You own title.  Overridden if extractTitle is TRUE.
 #' @param meta List containing meta information to include in the 4 corners of the plot: top_left, top_right, bottom_left, bottom_right
 #' @param fontsize The font size in pt.
@@ -67,6 +66,10 @@ ggTag <- function(object, raster = FALSE, extractTitle = FALSE,
                   title = NULL, meta=list(),
                   fontsize = 12, theme = NULL, inherit_size = FALSE){
 
+  if(extractTitle && !is.null(title)) {
+    warning("You have provided a title but set extractTitle to TRUE. Original title will be overwritten")
+  }
+  
   # What type of object is it
   type <- class(object)[1]
   
@@ -80,19 +83,22 @@ ggTag <- function(object, raster = FALSE, extractTitle = FALSE,
   
   # Redefine text to print to plot
   # Ensure appropriate title then count title lines
+  theTitle <- title
   if(extractTitle) {
-    if(type == "trellis") warning("Object is a lattice graphic so cannot extract title.\nFunctionality implemented for ggplot2 graphics only.")
-    if(type == "gg"){
-      if(!is.null(title)) {
-        warning("Overwriting original title")
+    if(type == "trellis") {
+      if(is.null(theTitle)){
+        theTitle <- object$main
       }
-      else{
+      object$main <- NULL
+    }
+    if(type == "gg"){
+      if(is.null(theTitle)){
         theTitle <- extractGGTitle(object)
       }
       object <- deleteGGTitle(object)
     }
   }
-  else theTitle <- title
+  
   
   # Title and meta lines
   titleLines <- countMeta(theTitle)
