@@ -72,12 +72,10 @@ ggTag <- function(object, raster = FALSE, extractTitle = FALSE,
   
   # If theme is specified update the object
   if(!is.null(theme)){
-    if(!inherit_size){
       object <- object + theme()
-    }
-    else{
-      object <- object + theme(base_size = fontsize)
-    }
+  }
+  if(inherit_size){
+    object <- object + ggplot2::theme(text = element_text(size = fontsize))
   }
   
   # Redefine text to print to plot
