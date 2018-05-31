@@ -2,7 +2,8 @@
 #'
 #' Tag a ggplot2 or lattice (or any grid) object with meta information by nesting it within a grid framework
 #' @param object A ggplot or lattice object
-#' @param useGGTitle Logical. Defaults to TRUE. Extract the title from the graph and use as plot title.
+#' @param extractTitle Logical. Defaults to FALSE. Extract the title from the graph and use as plot title.  
+#' Currently only implemented for ggplot2 graphics.
 #' @param title Character.You own title.  Overridden if extractTitle is TRUE.
 #' @param meta List containing meta information to include in the 4 corners of the plot: top_left, top_right, bottom_left, bottom_right
 #' @param fontsize The font size in pt.
@@ -51,10 +52,13 @@
 #'                       top_right = "Page 1 of 1",    
 #'       bottom_left = paste(username(), path()), bottom_right = date(), fontsize = 8)
 #' }
-ggTag <- function(object, raster = FALSE, useGGTitle = TRUE, 
-                  title, meta=list(),
+ggTag <- function(object, raster = FALSE, extractTitle = FALSE, 
+                  title = NULL, meta=list(),
                   fontsize = 12, theme = NULL, inherit_size = FALSE){
 
+  # What type of object is it
+  type <- class(object)[1]
+  
   # If theme is specified update the object
   if(!is.null(theme)){
     if(!inherit_size){
@@ -67,9 +71,17 @@ ggTag <- function(object, raster = FALSE, useGGTitle = TRUE,
   
   # Redefine text to print to plot
   # Ensure appropriate title then count title lines
-  if(useGGTitle) {
-    theTitle <- extractGGTitle(object)
-    object <- deleteGGTitle(object)
+  if(extractTitle) {
+    if(type == "trellis") warning("Object is a lattice graphic so cannot extract title.\nFunctionality implemented for ggplot2 graphics only.")
+    if(type == "gg"){
+      if(!is.null(title)) {
+        warning("Overwriting original title")
+      }
+      else{
+        theTitle <- extractGGTitle(object)
+      }
+      object <- deleteGGTitle(object)
+    }
   }
   else theTitle <- title
   
