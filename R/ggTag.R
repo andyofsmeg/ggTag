@@ -5,7 +5,7 @@
 #' @param extractTitle Logical. Defaults to FALSE. Extract the title from the graph and use as plot title.  
 #' @param title Character.You own title.  Overridden if extractTitle is TRUE.
 #' @param meta List containing meta information to include in the 4 corners of the plot: top_left, top_right, bottom_left, bottom_right
-#' @param fontsize The font size in pt.
+#' @param fontsize The font size in pt. Defaults to 12.
 #' @param theme An optional ggplot2 theme to use.  Only applies to the current plot, i.e. the main theme is not updated.
 #' @param inherit_size Logical.  If `TRUE` the value of fontsize is passed through to the selected ggplot2 theme.
 #' @param raster Logical. Defaults to FALSE. Set to TRUE if input is a matrix to raster.
