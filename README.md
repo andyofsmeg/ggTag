@@ -25,27 +25,18 @@ The main package function `ggTag` can simply take a ggplot2 object and will auto
 library(ggplot2)
 library(ggTag)
 
-library(mangoTraining)
+my_scat <- qplot(Temp, Wind, data = airquality, main = "Less Windy when Warm")
+# Let's have a look at this summary of 45 year old airquality data
+my_scat 
 
-myPlot <- qplot(Weight, Height, data = demoData, 
-  facets = Sex ~ Smokes,
-  main = "Scatter Plot of Height against Weight\nby Sex and Smoking Status\n",
-  xlab = "Weight",
-  ylab = "Height"
-)
+# Now let's tag it
+library(ggTag)
+ggTag(my_scat, 
+      meta = list(top_left = "Analysis ID 123456", top_right = "Page 1 of 1"),
+      extractTitle = TRUE)
 
-myPlot <- myPlot + theme_bw()
-myPlot <- myPlot +
-  theme(strip.text.y = element_text(),
-        strip.background = element_rect(fill = NA, linetype = 0),
-        panel.grid.minor = element_line(colour = NA),
-        panel.grid.major = element_line(colour = NA)
-  )
-myPlot
+# Pretend it's pharmaceutical data
+pharmaTag(my_scat, protocol = "GSK123456", population = "ITT",
+          extractTitle = TRUE) 
 
-
-ggTag(myPlot, 
-      meta = "Protocol: 123456\nPopulation: Intent-to-Treat",
-      metaRight = "Page 1 of 1",    
-      date = FALSE, username = TRUE, path = TRUE)
 ```
