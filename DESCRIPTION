@@ -4,7 +4,7 @@ Version: 1.0
 Author: Andy Nicholls <anicholls@mango-solutions.com>
 Maintainer: Andy Nicholls <anicholls@mango-solutions.com>
 Authors@R: person("Andy", "Nicholls", email = "anicholls@emango-solutions.com", role = c("aut", "cre"))
-Description: A package to allow ggplot2 or lattice graphics to be "tagged" with meta information.  The primary purpose of the pakcage is to take existing plots and wraps them in a grid fraemwork with metadata surrounding the plot.
+Description: A package to allow ggplot2 or lattice graphics to be "tagged" with meta information.  The primary purpose of the package is to take existing plots and wraps them in a grid fraemwork with metadata surrounding the plot.
 Imports: 
   ggplot2
 Depends: 
