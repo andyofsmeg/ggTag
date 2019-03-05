@@ -36,7 +36,8 @@ ggTag(my_scat,
       extractTitle = TRUE)
 
 # Pretend it's pharmaceutical data
-pharmaTag(my_scat, protocol = "GSK123456", population = "ITT",
+pharmaTag(my_scat, protocol = "GSK123456", population = "ITT", 
+          page = 1, pages = 2,
           extractTitle = TRUE) 
 
 ```
