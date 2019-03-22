@@ -14,7 +14,7 @@ test_that("path is correctly generated", {
 
 test_that("User ID is correctly generated", {
   
-  user <- Sys.getenv("USERNAME")
+  user <- Sys.info()["user"]
   
   expect_equal(createUserPath(userID = TRUE, path = FALSE), user)
   
@@ -22,7 +22,7 @@ test_that("User ID is correctly generated", {
 
 test_that("Combined User & path generate as expected", {
 
-  user <- Sys.getenv("USERNAME") 
+  user <- Sys.info()["user"]
   currentPath <- getwd()
   
   idPath <- createUserPath(userID = TRUE, path = TRUE)
