@@ -56,11 +56,11 @@ createUserPath <- function(userID = TRUE, path = TRUE){
   # Combinations of path & userID
   if(userID & path != ""){
   
-    path <- paste(Sys.getenv("USERNAME"), path, sep = ":")
+    path <- paste(Sys.info()["user"], path, sep = ":")
       
   } else if(userID & path == ""){
   
-    path <- Sys.getenv("USERNAME") 
+    path <- Sys.info()["user"]
     
   } else if(!userID & path == ""){
   
