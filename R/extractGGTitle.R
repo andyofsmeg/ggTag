@@ -30,9 +30,7 @@ deleteGGTitle <- function(object){
     plotLabels$title <- NULL
     plotLabels$subtitle <- NULL
   }
-  plotLabels <- structure(plotLabels, class = "labels")
-  # Return ggplot object without title
-  object$labels <- NULL
-  object <- object + labs(plotLabels)
+  # Return ggplot object without titles
+  object$labels <- plotLabels
   object
 }
