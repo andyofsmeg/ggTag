@@ -18,7 +18,7 @@ ggTag(object, raster = FALSE, extractTitle = FALSE, title = NULL,
 
 \item{meta}{List containing meta information to include in the 4 corners of the plot: top_left, top_right, bottom_left, bottom_right}
 
-\item{fontsize}{The font size in pt.}
+\item{fontsize}{The font size in pt. Defaults to 12.}
 
 \item{theme}{An optional ggplot2 theme to use.  Only applies to the current plot, i.e. the main theme is not updated.}
 
@@ -31,7 +31,6 @@ Tag a ggplot2 or lattice (or any grid) object with meta information by nesting i
 {
 library(grid)
 library(ggplot2)
-library(mangoTraining)
 # Layout used:
 grid.show.layout(
 grid.layout(nrow = 3, ncol = 3,
@@ -41,41 +40,53 @@ grid.layout(nrow = 3, ncol = 3,
 )
 
 # Create ggplot2 graphic
-myPlot <- qplot(Weight, Height, data = demoData, facets = Sex ~ Smokes,
-  main = "Scatter Plot of Height against Weight\\nby Sex and Smoking Status\\n",
-  xlab = "\\nWeight",
-  ylab = "Height\\n"
-)
-myPlot <- myPlot + theme_bw()
-myPlot <- myPlot +
+my_plot <- ggplot(data = airquality,
+                 aes(x = Wind, y = Temp)) +
+  geom_point() +
+  theme_bw() +
   theme(strip.text.y = element_text(),
         strip.background = element_rect(fill = NA, linetype = 0),
         panel.grid.minor = element_line(colour = NA),
         panel.grid.major = element_line(colour = NA)
   )
-myPlot
+my_plot
 
 
-ggTag(myPlot, 
+ggTag(my_plot, 
       meta = list(top_left = "Protocol: 123456\\nPopulation: Intent-to-Treat",
                   top_right = "Page 1 of 1",    
                   bottom_left = paste(Sys.getenv("USERNAME"), getwd()), 
                   bottom_right = date()))
       
 # Reduce font size
-ggTag(myPlot, 
+ggTag(my_plot, 
       meta = list(top_left = "Protocol: 123456\\nPopulation: Intent-to-Treat",
                   top_right = "Page 1 of 1",    
                   bottom_left = paste(Sys.getenv("USERNAME"), getwd()), 
                   bottom_right = date()), 
                   fontsize = 8)
                   
- # Change theme          
-ggTag(myPlot, 
+# Change theme          
+ggTag(my_plot, 
       meta = list(top_left = "Protocol: 123456\\nPopulation: Intent-to-Treat",
                   top_right = "Page 1 of 1",    
                   bottom_left = paste(Sys.getenv("USERNAME"), getwd()), 
                   bottom_right = date()),
-                  theme = theme_grey())       
+                  theme = theme_grey())     
+                  
+\dontrun{                   
+# Reading in a pdf as a raster
+library(png)
+png_loc <- system.file(package = "ggTag", "extdata/r_logo.png")
+a_png <- readPNG(png_loc)
+
+pharmaTag(object = a_png, raster = TRUE,
+          protocol = "ABC123456",
+          population = "Intent-to-treat")
+
+
+
+}
+                          
 }
 }

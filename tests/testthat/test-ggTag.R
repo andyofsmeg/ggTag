@@ -8,4 +8,4 @@ testGraph <- qplot(Day, Wind, data = airquality, geom = "line",
 
 test_that("Can create an image", {
   expect_silent(ggTag(testGraph))
-  })
+})

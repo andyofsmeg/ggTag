@@ -17,25 +17,21 @@
 #' @examples{
 #' library(grid)
 #' library(ggplot2)
-#' library(mangoTraining)
-#' # Layout used:
 #'
 #' # Create ggplot2 graphic
-#' myPlot <- qplot(Weight, Height, data = demoData, facets = Sex ~ Smokes,
-#'   main = "Scatter Plot of Height against Weight\nby Sex and Smoking Status\n",
-#'   xlab = "\nWeight",
-#'   ylab = "Height\n"
-#' )
-#' myPlot <- myPlot + theme_bw()
-#' myPlot <- myPlot +
+#' my_plot <- ggplot(data = airquality,
+#'                  aes(x = Wind, y = Temp)) +
+#'   geom_point() +
+#'   theme_bw() +
 #'   theme(strip.text.y = element_text(),
 #'         strip.background = element_rect(fill = NA, linetype = 0),
 #'         panel.grid.minor = element_line(colour = NA),
 #'         panel.grid.major = element_line(colour = NA)
 #'   )
+#' my_plot
 #'
 #'
-#' pharmaTag(myPlot, fontsize = 8)
+#' pharmaTag(my_plot, fontsize = 8)
 #'       
 #' }
 pharmaTag <- function(object,

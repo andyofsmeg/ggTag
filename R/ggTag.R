@@ -15,7 +15,6 @@
 #' @examples{
 #' library(grid)
 #' library(ggplot2)
-#' library(mangoTraining)
 #' # Layout used:
 #' grid.show.layout(
 #'	grid.layout(nrow = 3, ncol = 3,
@@ -25,42 +24,54 @@
 #' )
 #'
 #' # Create ggplot2 graphic
-#' myPlot <- qplot(Weight, Height, data = demoData, facets = Sex ~ Smokes,
-#'   main = "Scatter Plot of Height against Weight\nby Sex and Smoking Status\n",
-#'   xlab = "\nWeight",
-#'   ylab = "Height\n"
-#' )
-#' myPlot <- myPlot + theme_bw()
-#' myPlot <- myPlot +
+#' my_plot <- ggplot(data = airquality,
+#'                  aes(x = Wind, y = Temp)) +
+#'   geom_point() +
+#'   theme_bw() +
 #'   theme(strip.text.y = element_text(),
 #'         strip.background = element_rect(fill = NA, linetype = 0),
 #'         panel.grid.minor = element_line(colour = NA),
 #'         panel.grid.major = element_line(colour = NA)
 #'   )
-#' myPlot
+#' my_plot
 #'
 #'
-#' ggTag(myPlot, 
+#' ggTag(my_plot, 
 #'       meta = list(top_left = "Protocol: 123456\nPopulation: Intent-to-Treat",
 #'                   top_right = "Page 1 of 1",    
 #'                   bottom_left = paste(Sys.getenv("USERNAME"), getwd()), 
 #'                   bottom_right = date()))
 #'       
 #' # Reduce font size
-#' ggTag(myPlot, 
+#' ggTag(my_plot, 
 #'       meta = list(top_left = "Protocol: 123456\nPopulation: Intent-to-Treat",
 #'                   top_right = "Page 1 of 1",    
 #'                   bottom_left = paste(Sys.getenv("USERNAME"), getwd()), 
 #'                   bottom_right = date()), 
 #'                   fontsize = 8)
 #'                   
-#'  # Change theme          
-#' ggTag(myPlot, 
+#' # Change theme          
+#' ggTag(my_plot, 
 #'       meta = list(top_left = "Protocol: 123456\nPopulation: Intent-to-Treat",
 #'                   top_right = "Page 1 of 1",    
 #'                   bottom_left = paste(Sys.getenv("USERNAME"), getwd()), 
 #'                   bottom_right = date()),
-#'                   theme = theme_grey())       
+#'                   theme = theme_grey())     
+#'                   
+#' \dontrun{                   
+#' # Reading in a pdf as a raster
+#' library(png)
+#' png_loc <- system.file(package = "ggTag", "extdata/r_logo.png")
+#' a_png <- readPNG(png_loc)
+#' 
+#' pharmaTag(object = a_png, raster = TRUE,
+#'           protocol = "ABC123456",
+#'           population = "Intent-to-treat")
+#' 
+#' 
+#' 
+#' }
+#'                           
 #' }
 ggTag <- function(object, raster = FALSE, extractTitle = FALSE, 
                   title = NULL, meta=list(),
