@@ -8,7 +8,6 @@
 #' @param fontsize The font size in pt. Defaults to 12.
 #' @param theme An optional ggplot2 theme to use.  Only applies to the current plot, i.e. the main theme is not updated.
 #' @param inherit_size Logical.  If `TRUE` the value of fontsize is passed through to the selected ggplot2 theme.
-#' @param raster Logical. Defaults to FALSE. Set to TRUE if input is a matrix to raster.
 #' @import grid
 #' @importFrom stringr str_split
 #' @export
@@ -63,10 +62,9 @@
 #' a_png <- readPNG(png_loc)
 #' 
 #' pharmaTag(object = a_png, 
-#'           raster = TRUE,
 #'           protocol = "ABC123456",
 #'           population = "Intent-to-treat")
-ggTag <- function(object, raster = FALSE, extractTitle = FALSE, 
+ggTag <- function(object, extractTitle = FALSE, 
                   title = NULL, meta=list(),
                   fontsize = 12, theme = NULL, inherit_size = FALSE){
 
@@ -155,7 +153,7 @@ ggTag <- function(object, raster = FALSE, extractTitle = FALSE,
 
 	# Main
 	pushViewport(viewport(layout.pos.row = 2, layout.pos.col = 2))
-	if(!raster){
+	if(!"array" %in% class(object)){
 	  print(object, newpage = F)
 	}
 	else{

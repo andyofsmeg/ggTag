@@ -16,7 +16,7 @@ library(png)
 png_loc <- system.file(package = "ggTag", "extdata/r_logo.png")
 a_png <- readPNG(png_loc)
 
-pharmaTag(object = a_png, raster = TRUE,
+pharmaTag(object = a_png, 
           protocol = "ABC123456",
           population = "Intent-to-treat")
 
