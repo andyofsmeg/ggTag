@@ -12,15 +12,24 @@ addDateTime <- function(date_format = "%d%b%Y %H:%M"){
 }
 
 
+#' Count string lines 
+#' 
+#' Count string lines based on character returns
+#' @param string a character vector of length 1.
+count_lines <- function(string){
+  length(unlist(str_split(string, "\\n")))
+}
+
 #' Count meta lines
 #' 
 #' Function to count the number of lines of meta information
 #' 
-#' @param meta Lines of meta information for a single meta data item
+#' @param meta Lines of meta information for a single meta data item.  The function counts lines based on character returns, \code{"\n"} and the number of elements in the vector.  
 #' @return numeric. The total number of lines of meta information.
-#' 
 countMeta <- function(meta){
-  length(unlist(str_split(meta, "\\n")))
+  # lines_in_each_element <- lapply(meta, count_lines)
+  # sum(unlist(lines_in_each_element))
+  count_lines(meta)
 }
 
 #' Count meta lines

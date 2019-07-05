@@ -7,7 +7,7 @@
 countMeta(meta)
 }
 \arguments{
-\item{meta}{Lines of meta information for a single meta data item}
+\item{meta}{Lines of meta information for a single meta data item.  The function counts lines based on character returns, \code{"\n"} and the number of elements in the vector.}
 }
 \value{
 numeric. The total number of lines of meta information.

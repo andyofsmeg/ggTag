@@ -101,6 +101,8 @@ ggTag <- function(object, extractTitle = FALSE,
     }
   }
   
+  # # Turn vector of meta information into separate lines
+  # lapply(meta, function(x) paste(x, collapse = "\n"))
   
   # Title and meta lines
   titleLines <- countMeta(theTitle)
