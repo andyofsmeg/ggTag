@@ -1,7 +1,7 @@
 #' Tag a ggplot2 graphic with meta information
 #'
 #' Tag a ggplot2 or lattice (or any grid) object with meta information by nesting it within a grid framework
-#' @param object A ggplot or lattice object
+#' @param object A ggplot or lattice object, else a raster object as produced by the png package.
 #' @param extractTitle Logical. Defaults to FALSE. Extract the title from the graph and use as plot title.  
 #' @param title Character.You own title.  Overridden if extractTitle is TRUE.
 #' @param meta List containing meta information to include in the 4 corners of the plot: top_left, top_right, bottom_left, bottom_right
