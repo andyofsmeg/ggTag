@@ -12,7 +12,7 @@
 #' @import grid
 #' @importFrom stringr str_split
 #' @export
-#' @examples{
+#' @examples
 #' library(grid)
 #' library(ggplot2)
 #' # Layout used:
@@ -35,44 +35,37 @@
 #'   )
 #' my_plot
 #'
-#'
+#' #ggTag generic use
 #' ggTag(my_plot, 
 #'       meta = list(top_left = "Protocol: 123456\nPopulation: Intent-to-Treat",
 #'                   top_right = "Page 1 of 1",    
 #'                   bottom_left = paste(Sys.getenv("USERNAME"), getwd()), 
 #'                   bottom_right = date()))
+#'                   
+#' # Using pharmaTag
+#' pharmaTag(my_plot)
 #'       
 #' # Reduce font size
-#' ggTag(my_plot, 
-#'       meta = list(top_left = "Protocol: 123456\nPopulation: Intent-to-Treat",
-#'                   top_right = "Page 1 of 1",    
-#'                   bottom_left = paste(Sys.getenv("USERNAME"), getwd()), 
-#'                   bottom_right = date()), 
-#'                   fontsize = 8)
+#' pharmaTag(my_plot,
+#'           protocol = "ABC123456",
+#'           population = "Intent-to-treat", 
+#'           fontsize = 8)
 #'                   
 #' # Change theme          
-#' ggTag(my_plot, 
-#'       meta = list(top_left = "Protocol: 123456\nPopulation: Intent-to-Treat",
-#'                   top_right = "Page 1 of 1",    
-#'                   bottom_left = paste(Sys.getenv("USERNAME"), getwd()), 
-#'                   bottom_right = date()),
-#'                   theme = theme_grey())     
+#' pharmaTag(my_plot,
+#'           protocol = "ABC123456",
+#'           population = "Intent-to-treat", 
+#'           theme = theme_grey())     
 #'                   
-#' \dontrun{                   
 #' # Reading in a pdf as a raster
 #' library(png)
 #' png_loc <- system.file(package = "ggTag", "extdata/r_logo.png")
 #' a_png <- readPNG(png_loc)
 #' 
-#' pharmaTag(object = a_png, raster = TRUE,
+#' pharmaTag(object = a_png, 
+#'           raster = TRUE,
 #'           protocol = "ABC123456",
 #'           population = "Intent-to-treat")
-#' 
-#' 
-#' 
-#' }
-#'                           
-#' }
 ggTag <- function(object, raster = FALSE, extractTitle = FALSE, 
                   title = NULL, meta=list(),
                   fontsize = 12, theme = NULL, inherit_size = FALSE){

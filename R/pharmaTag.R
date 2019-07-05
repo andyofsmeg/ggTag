@@ -1,7 +1,6 @@
 #' Tag a ggplot2 graphic with meta information, specific to phara requirements
 #'
 #' A wrapper for `ggTag`, specific to the pharma industry
-#' @param object A ggplot or lattice object
 #' @param protocol What is the protocol number?
 #' @param population What is the population?
 #' @param page What is the page?
@@ -14,26 +13,7 @@
 #' @import grid
 #' @importFrom stringr str_split
 #' @export
-#' @examples{
-#' library(grid)
-#' library(ggplot2)
-#'
-#' # Create ggplot2 graphic
-#' my_plot <- ggplot(data = airquality,
-#'                  aes(x = Wind, y = Temp)) +
-#'   geom_point() +
-#'   theme_bw() +
-#'   theme(strip.text.y = element_text(),
-#'         strip.background = element_rect(fill = NA, linetype = 0),
-#'         panel.grid.minor = element_line(colour = NA),
-#'         panel.grid.major = element_line(colour = NA)
-#'   )
-#' my_plot
-#'
-#'
-#' pharmaTag(my_plot, fontsize = 8)
-#'       
-#' }
+#' @rdname ggTag
 pharmaTag <- function(object,
                       protocol = NA, 
                       population = NA,
