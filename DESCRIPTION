@@ -1,6 +1,6 @@
 Package: ggTag
 Title: A package to allow ggplot2 or lattice graphics to be "tagged" with meta information
-Version: 1.0
+Version: 1.1.1
 Author: Andy Nicholls <andyofsmeg@hotmail.com>
 Maintainer: Andy Nicholls <andyofsmeg@hotmail.com>
 Authors@R: person("Andy", "Nicholls", email = "andyofsmeg@hotmail.com", role = c("aut", "cre"))

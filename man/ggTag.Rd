@@ -5,8 +5,8 @@
 \alias{pharmaTag}
 \title{Tag a ggplot2 graphic with meta information}
 \usage{
-ggTag(object, raster = FALSE, extractTitle = FALSE, title = NULL,
-  meta = list(), fontsize = 12, theme = NULL, inherit_size = FALSE)
+ggTag(object, extractTitle = FALSE, title = NULL, meta = list(),
+  fontsize = 12, theme = NULL, inherit_size = FALSE)
 
 pharmaTag(object, protocol = NA, population = NA, page = 1,
   pages = 1, date = TRUE, username = TRUE, path = TRUE,
@@ -14,8 +14,6 @@ pharmaTag(object, protocol = NA, population = NA, page = 1,
 }
 \arguments{
 \item{object}{A ggplot or lattice object}
-
-\item{raster}{Logical. Defaults to FALSE. Set to TRUE if input is a matrix to raster.}
 
 \item{extractTitle}{Logical. Defaults to FALSE. Extract the title from the graph and use as plot title.}
 
@@ -103,7 +101,6 @@ png_loc <- system.file(package = "ggTag", "extdata/r_logo.png")
 a_png <- readPNG(png_loc)
 
 pharmaTag(object = a_png, 
-          raster = TRUE,
           protocol = "ABC123456",
           population = "Intent-to-treat")
 }
