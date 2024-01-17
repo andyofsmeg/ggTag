@@ -9,7 +9,7 @@ addDateTime <- function(date_format = "%d%b%Y %H:%M"){
   
   theTime
   
-}
+} 
 
 
 #' Count string lines 
